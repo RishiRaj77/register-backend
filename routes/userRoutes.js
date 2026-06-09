@@ -6,6 +6,9 @@ const auth = require('../middleware/authMiddleware');
 // Authentication Routes
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
+router.get('/verify-email/:token', userController.verifyEmail);
+router.post('/forgot-password', userController.forgotPassword);
+router.put('/reset-password/:token', userController.resetPassword);
 
 // Admin CRUD Routes (Protected)
 router.get('/users', auth, userController.getUsers);
