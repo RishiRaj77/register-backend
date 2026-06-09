@@ -32,25 +32,7 @@ const signup = async (req, res) => {
     });
 
     await newUser.save();
-
-    // Send verification email
-    const verifyUrl = `${process.env.CLIENT_URL || 'http://localhost:5173'}/verify-email/${verificationToken}`;
-    const message = `Please verify your email by clicking: \n\n ${verifyUrl}`;
-
-    try {
-      await sendEmail({
-        email: newUser.email,
-        subject: 'Email Verification',
-        message,
-      });
-
-      res.status(201).json({ message: "User registered! Please check your email to verify your account." });
-    } catch (error) {
-      console.log(error);
-      newUser.verificationToken = undefined;
-      await newUser.save({ validateBeforeSave: false });
-      return res.status(500).json({ message: "Email could not be sent" });
-    }
+    res.status(201).json({ message: "User registered successfully!" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error during registration" });
@@ -84,11 +66,6 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: "Invalid email or password" });
-    }
-
-    // Check if user is verified
-    if (!user.isVerified) {
-      return res.status(401).json({ message: "Please verify your email before logging in" });
     }
 
     // Validate password
@@ -125,45 +102,22 @@ const login = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: "There is no user with that email" });
     }
 
-    // Generate reset token
-    const resetToken = crypto.randomBytes(20).toString('hex');
-    
-    // Hash token and set to resetPasswordToken field
-    user.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-    
-    // Set expire (10 minutes)
-    user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    await user.save();
 
-    await user.save({ validateBeforeSave: false });
-
-    // Create reset url
-    const resetUrl = `${process.env.CLIENT_URL || 'http://localhost:5173'}/reset-password/${resetToken}`;
-    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please click: \n\n ${resetUrl}`;
-
-    try {
-      await sendEmail({
-        email: user.email,
-        subject: 'Password Reset Token',
-        message,
-      });
-
-      res.status(200).json({ message: "Email sent" });
-    } catch (error) {
-      console.log(error);
-      user.resetPasswordToken = undefined;
-      user.resetPasswordExpire = undefined;
-      await user.save({ validateBeforeSave: false });
-      return res.status(500).json({ message: "Email could not be sent" });
-    }
+    res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error during forgot password" });
+    res.status(500).json({ message: "Server error during password reset" });
   }
 };
 
