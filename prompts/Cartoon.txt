@@ -1,0 +1,25 @@
+Transform the uploaded portrait photo into a modern cartoon avatar.
+
+Preserve the person's identity, hairstyle, facial structure, eyes, eyebrows, nose, lips, expression, and exact clothing/outfit. Do not change their clothes.
+
+Style:
+- Clean vector illustration
+- Smooth outlines
+- Professional avatar design
+- Expressive eyes
+- Soft shading
+- Modern mobile app avatar style
+- Friendly appearance
+- Detailed hair
+- High-quality character illustration
+
+Background:
+- Soft pastel gradient
+- Minimal design
+
+Composition:
+- Head and shoulders portrait
+- Centered framing
+- Rounded app-icon appearance
+
+Ultra detailed, sharp, premium quality, suitable for profile pictures and avatar apps.

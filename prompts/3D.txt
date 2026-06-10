@@ -1,0 +1,64 @@
+Create a premium Pixar-style 3D avatar from the uploaded selfie.
+
+PRIMARY OBJECTIVE:
+Preserve the person's identity with high facial similarity. The generated avatar must clearly resemble the uploaded person.
+
+FACE PRESERVATION:
+- Maintain facial structure
+- Maintain face shape
+- Maintain hairstyle and hair color
+- Maintain eye shape and eye color
+- Maintain eyebrows
+- Maintain nose structure
+- Maintain lips and smile
+- Maintain skin tone
+- Maintain age appearance
+- Maintain unique facial characteristics
+
+STYLE:
+- Disney Pixar animated character
+- Professional 3D character design
+- Friendly and approachable appearance
+- Realistic proportions
+- Large expressive eyes
+- Detailed hair strands
+- Smooth skin rendering
+- High-quality facial details
+
+CLOTHING:
+- Maintain the EXACT clothing, outfit, and neckline from the uploaded photo
+- Do not change the person's clothes
+
+POSE:
+- Looking directly at the camera
+- Natural smile
+- Waist-up portrait
+- Centered composition
+- Professional profile picture style
+
+LIGHTING:
+- Soft cinematic studio lighting
+- Global illumination
+- Soft shadows
+- Professional portrait photography lighting
+- Realistic reflections in eyes
+
+BACKGROUND:
+- Clean soft gray-blue gradient
+- Minimal studio environment
+- No distracting objects
+
+RENDER QUALITY:
+- Ultra detailed
+- Sharp focus
+- 4K quality
+- High-end animated movie quality
+- Physically based rendering
+- Premium mobile avatar application quality
+
+IMPORTANT:
+Generate a male avatar if the uploaded image contains a male.
+Generate a female avatar if the uploaded image contains a female.
+Do not change gender.
+Do not create a generic character.
+The final avatar must strongly resemble the uploaded person.

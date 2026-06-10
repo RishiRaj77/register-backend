@@ -1,0 +1,19 @@
+Convert the uploaded portrait photo into a professional black-and-white sketch portrait.
+
+Preserve facial identity, hairstyle, expression, proportions, and exact clothing/outfit. Do not change their clothes.
+
+Style:
+- Pencil drawing
+- Clean line art
+- Realistic facial shading
+- Professional portrait illustration
+- High contrast
+- Detailed facial features
+- White background
+
+Composition:
+- Centered portrait
+- Head and shoulders framing
+- Studio portrait look
+
+Ultra detailed, artist-quality sketch, sharp lines, premium illustration.

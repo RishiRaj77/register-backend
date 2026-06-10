@@ -3,11 +3,12 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
+const avatarRoutes = require("./routes/avatarRoutes");
 
 const app = express();
 
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Increased limit for base64 images
 app.use(cors({
   origin: ["http://localhost:5173", "https://project-x3o2t.vercel.app"]
 }));
@@ -28,6 +29,7 @@ connectDB();
 
 // Routes
 app.use("/api", userRoutes);
+app.use("/api/avatar", avatarRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 3001;
