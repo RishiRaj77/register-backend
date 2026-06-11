@@ -1,4 +1,5 @@
-const key = "AIzaSyBa5I5W01ap_7MMb1vyAn6TtWNdpGT-uUY";
+require('dotenv').config();
+const key = process.env.GEMINI_KEY;
 
 async function testKey() {
   try {

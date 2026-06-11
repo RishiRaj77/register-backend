@@ -106,15 +106,47 @@ Style requested: ${stylePrompt}`;
       });
     }
 
-    console.log("Image generated successfully!");
+    // Save to database for QR code downloading
+    const Avatar = require('../models/Avatar');
+    const newAvatar = new Avatar({ imageBase64: generatedImageBase64 });
+    await newAvatar.save();
+
+    console.log("Image generated and saved successfully!");
     res.json({
       persona: personaText,
-      generatedImage: generatedImageBase64
+      generatedImage: generatedImageBase64,
+      imageId: newAvatar._id
     });
 
   } catch (error) {
     console.error("Avatar generation Error:", error.message);
     res.status(500).json({ error: "Failed to generate image: " + error.message });
+  }
+});
+
+// Route for direct download from QR code
+router.get('/download/:id', async (req, res) => {
+  try {
+    const Avatar = require('../models/Avatar');
+    const avatar = await Avatar.findById(req.params.id);
+    
+    if (!avatar) {
+      return res.status(404).send('Avatar not found or has expired (they are deleted after 24 hours).');
+    }
+
+    const base64Data = avatar.imageBase64.replace(/^data:image\/\w+;base64,/, "");
+    const imgBuffer = Buffer.from(base64Data, 'base64');
+    
+    res.writeHead(200, {
+      'Content-Type': 'image/jpeg',
+      'Content-Length': imgBuffer.length,
+      'Content-Disposition': 'attachment; filename="my_avatar.jpg"'
+    });
+    
+    res.end(imgBuffer);
+  } catch (error) {
+    console.error("Download error:", error.message);
+    res.status(500).send("Failed to download image.");
   }
 });
 
